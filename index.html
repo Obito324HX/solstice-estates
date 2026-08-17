@@ -372,6 +372,195 @@
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.16,.84,.44,1);}
   .reveal.in{opacity:1;transform:translateY(0);}
 
+  /* --- Editorial index numbering --- */
+  .eyebrow-row{display:flex;align-items:baseline;gap:10px;}
+  .index-num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:0.1em;color:var(--ink-soft);opacity:0.55;
+  }
+  .statement .index-num,.about .index-num{color:rgba(246,241,231,0.5);}
+  .statement .eyebrow-row{color:var(--gold-soft);}
+
+  /* --- Prestige badge on listing photos --- */
+  .listing-badge{
+    position:absolute;top:16px;right:16px;
+    background:var(--gold);color:var(--charcoal);
+    padding:6px 12px;font-family:'IBM Plex Mono',monospace;
+    font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+    z-index:2;
+  }
+
+  /* --- Quick view hover overlay --- */
+  .quickview{
+    position:absolute;inset:0;z-index:1;
+    background:linear-gradient(to top, rgba(20,24,19,0.9) 0%, rgba(20,24,19,0.05) 55%);
+    display:flex;align-items:flex-end;justify-content:center;padding-bottom:28px;
+    opacity:0;transition:opacity .35s ease;
+  }
+  .listing-card:hover .quickview{opacity:1;}
+  .quickview span{
+    color:var(--ivory);font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:0.12em;text-transform:uppercase;
+    border:1px solid rgba(246,241,231,0.6);padding:11px 22px;
+    transform:translateY(10px);transition:transform .35s ease;
+  }
+  .listing-card:hover .quickview span{transform:translateY(0);}
+  .listing-card{cursor:pointer;}
+
+  /* --- Property modal --- */
+  .property-modal{
+    position:fixed;inset:0;z-index:200;
+    display:flex;align-items:center;justify-content:center;
+    padding:4vh 4vw;
+    background:rgba(12,15,11,0.92);
+    opacity:0;visibility:hidden;
+    transition:opacity .4s ease, visibility 0s linear .4s;
+  }
+  .property-modal.open{opacity:1;visibility:visible;transition:opacity .4s ease;}
+  .modal-panel{
+    background:var(--ivory);width:min(980px,100%);max-height:92vh;overflow-y:auto;
+    display:grid;grid-template-columns:1.1fr 0.9fr;
+    transform:translateY(24px);transition:transform .45s cubic-bezier(.16,.84,.44,1);
+  }
+  .property-modal.open .modal-panel{transform:translateY(0);}
+  .modal-close{
+    position:absolute;top:22px;right:22px;z-index:5;
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(20,24,19,0.5);border:1px solid rgba(246,241,231,0.3);
+    color:var(--ivory);font-size:18px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease;
+  }
+  .modal-close:hover{background:rgba(20,24,19,0.85);}
+  .modal-gallery{position:relative;background:var(--charcoal);min-height:320px;}
+  .modal-gallery-track{position:relative;height:100%;min-height:320px;}
+  .modal-gallery-track img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity .5s ease;
+  }
+  .modal-gallery-track img.active{opacity:1;}
+  .modal-gallery-nav{
+    position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+    display:flex;gap:8px;z-index:3;
+  }
+  .modal-gallery-nav button{
+    width:26px;height:2px;background:rgba(246,241,231,0.4);border:none;cursor:pointer;padding:0;
+    transition:background .2s ease;
+  }
+  .modal-gallery-nav button.active{background:var(--gold);}
+  .modal-gallery-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+    width:38px;height:38px;border-radius:50%;
+    background:rgba(20,24,19,0.5);border:1px solid rgba(246,241,231,0.25);
+    color:var(--ivory);cursor:pointer;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .modal-gallery-arrow.prev{left:18px;}
+  .modal-gallery-arrow.next{right:18px;}
+  .modal-body{padding:44px 40px;display:flex;flex-direction:column;}
+  .modal-locale{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage);}
+  .modal-body h3{font-size:28px;margin-top:8px;color:var(--ink);}
+  .modal-price{margin-top:12px;font-family:'Fraunces',serif;font-size:22px;color:var(--clay);}
+  .modal-specs{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px 18px;
+    margin-top:22px;padding:18px 0;border-top:1px solid rgba(28,36,32,0.12);border-bottom:1px solid rgba(28,36,32,0.12);
+  }
+  .modal-specs div{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);}
+  .modal-specs div b{display:block;color:var(--ink);font-size:14px;font-family:'Fraunces',serif;font-weight:500;margin-top:2px;}
+  .modal-desc{margin-top:20px;font-size:14.5px;line-height:1.75;color:var(--ink-soft);}
+  .modal-form{margin-top:26px;}
+  .modal-form .eyebrow{margin-bottom:14px;display:block;}
+  .modal-form input,.modal-form textarea{
+    width:100%;background:var(--ivory-2);border:1px solid rgba(28,36,32,0.15);
+    padding:12px 14px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--ink);
+    margin-bottom:10px;resize:none;
+  }
+  .modal-form textarea{min-height:70px;}
+  .modal-form input:focus,.modal-form textarea:focus{outline:1px solid var(--gold);}
+  .modal-form button{width:100%;justify-content:center;border:none;}
+  .form-confirm{
+    display:none;margin-top:18px;padding:14px 16px;
+    background:rgba(92,107,83,0.12);border-left:2px solid var(--sage);
+    font-size:13px;color:var(--ink-soft);
+  }
+  .form-confirm.show{display:block;}
+
+  /* --- Inquiry drawer --- */
+  .drawer-overlay{
+    position:fixed;inset:0;z-index:210;background:rgba(12,15,11,0.6);
+    opacity:0;visibility:hidden;transition:opacity .4s ease, visibility 0s linear .4s;
+  }
+  .drawer-overlay.open{opacity:1;visibility:visible;transition:opacity .4s ease;}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;z-index:211;
+    width:min(420px,92vw);background:var(--ivory);
+    padding:38px 34px;overflow-y:auto;
+    transform:translateX(100%);transition:transform .45s cubic-bezier(.16,.84,.44,1);
+  }
+  .drawer-overlay.open .drawer{transform:translateX(0);}
+  .drawer-close{
+    width:36px;height:36px;border-radius:50%;border:1px solid rgba(28,36,32,0.2);
+    background:none;color:var(--ink);font-size:16px;cursor:pointer;float:right;
+  }
+  .drawer h3{font-size:24px;margin-top:44px;color:var(--ink);}
+  .drawer p{color:var(--ink-soft);font-size:13.5px;line-height:1.6;margin-top:10px;}
+  .drawer .modal-form{margin-top:28px;}
+  .drawer select{
+    width:100%;background:var(--ivory-2);border:1px solid rgba(28,36,32,0.15);
+    padding:12px 14px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--ink);margin-bottom:10px;
+  }
+
+  /* --- Neighborhoods --- */
+  .neighborhoods{background:var(--ivory);}
+  .nb-layout{display:grid;grid-template-columns:0.62fr 1.38fr;gap:0;border:1px solid rgba(28,36,32,0.1);}
+  .nb-tabs{display:flex;flex-direction:column;border-right:1px solid rgba(28,36,32,0.1);}
+  .nb-tab{
+    text-align:left;padding:22px 24px;background:none;border:none;border-bottom:1px solid rgba(28,36,32,0.08);
+    cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+    font-family:'Fraunces',serif;font-size:17px;color:var(--ink-soft);transition:all .25s ease;
+  }
+  .nb-tab .n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--sage);}
+  .nb-tab:hover{background:var(--ivory-2);}
+  .nb-tab.active{background:var(--charcoal);color:var(--ivory);}
+  .nb-tab.active .n{color:var(--gold-soft);}
+  .nb-panel{display:none;grid-template-columns:1fr 1fr;}
+  .nb-panel.active{display:grid;}
+  .nb-photo{aspect-ratio:4/3;overflow:hidden;}
+  .nb-photo img{width:100%;height:100%;object-fit:cover;}
+  .nb-info{padding:40px 42px;display:flex;flex-direction:column;justify-content:center;}
+  .nb-info h4{font-size:24px;color:var(--ink);}
+  .nb-info p{color:var(--ink-soft);font-size:14px;line-height:1.7;margin-top:14px;}
+  .nb-traits{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(28,36,32,0.1);}
+  .nb-traits div span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;}
+  .nb-traits div b{font-family:'Inter',sans-serif;font-weight:500;font-size:13px;color:var(--ink);}
+
+  /* --- Mobile full-screen menu --- */
+  .mobile-nav{
+    position:fixed;inset:0;z-index:100;
+    background:var(--charcoal);
+    display:flex;flex-direction:column;justify-content:center;padding:0 8vw;
+    opacity:0;visibility:hidden;transition:opacity .4s ease, visibility 0s linear .4s;
+  }
+  .mobile-nav.open{opacity:1;visibility:visible;transition:opacity .4s ease;}
+  .mobile-nav-close{
+    position:absolute;top:22px;right:6vw;color:var(--ivory);background:none;border:none;font-size:24px;cursor:pointer;
+  }
+  .mobile-nav ul{list-style:none;}
+  .mobile-nav li{
+    opacity:0;transform:translateY(18px);
+    transition:opacity .5s ease, transform .5s cubic-bezier(.16,.84,.44,1);
+  }
+  .mobile-nav.open li{opacity:1;transform:translateY(0);}
+  .mobile-nav.open li:nth-child(1){transition-delay:.08s;}
+  .mobile-nav.open li:nth-child(2){transition-delay:.16s;}
+  .mobile-nav.open li:nth-child(3){transition-delay:.24s;}
+  .mobile-nav.open li:nth-child(4){transition-delay:.32s;}
+  .mobile-nav a{
+    font-family:'Fraunces',serif;font-size:38px;color:var(--ivory);
+    display:block;padding:14px 0;border-bottom:1px solid rgba(246,241,231,0.1);
+  }
+  .mobile-nav a em{color:var(--gold-soft);font-style:italic;}
+
   @media(max-width:900px){
     nav ul{display:none;}
     .menu-toggle{display:block;}
@@ -383,6 +572,14 @@
     .about-grid{grid-template-columns:1fr;}
     .cta-contacts{gap:34px;}
     section{padding:80px 6vw;}
+    .modal-panel{grid-template-columns:1fr;}
+    .modal-gallery{min-height:240px;}
+    .modal-gallery-track{min-height:240px;}
+    .nb-layout{grid-template-columns:1fr;}
+    .nb-tabs{flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid rgba(28,36,32,0.1);}
+    .nb-tab{white-space:nowrap;border-bottom:none;border-right:1px solid rgba(28,36,32,0.08);}
+    .nb-panel.active{grid-template-columns:1fr;}
+    .mobile-nav a{font-size:30px;}
   }
 </style>
 </head>
@@ -401,12 +598,24 @@
     <ul>
       <li><a href="#listings">Listings</a></li>
       <li><a href="#developments">Developments</a></li>
+      <li><a href="#neighborhoods">Neighborhoods</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#contact" class="nav-cta">Enquire</a></li>
+      <li><a href="#" class="nav-cta" data-open-drawer>Enquire</a></li>
     </ul>
   </nav>
-  <button class="menu-toggle">☰</button>
+  <button class="menu-toggle" data-open-mobile-nav>☰</button>
 </header>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" data-close-mobile-nav>✕</button>
+  <ul>
+    <li><a href="#listings" data-close-mobile-nav>Listings</a></li>
+    <li><a href="#developments" data-close-mobile-nav>Developments</a></li>
+    <li><a href="#neighborhoods" data-close-mobile-nav>Neighborhoods</a></li>
+    <li><a href="#about" data-close-mobile-nav>About</a></li>
+    <li><a href="#" data-open-drawer data-close-mobile-nav><em>Enquire</em></a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <section class="hero" style="padding:0;">
@@ -427,13 +636,13 @@
 <div class="private-banner">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
   <p><strong>Confidential Acquisitions &amp; Private Sales.</strong> Select inventory is never publicly listed and is shown by direct introduction only.</p>
-  <a href="#contact">Request Access →</a>
+  <a href="#" data-open-drawer>Request Access →</a>
 </div>
 
 <!-- POSITIONING STATEMENT -->
 <section class="statement">
   <div class="wrap reveal">
-    <span class="eyebrow" style="color:var(--gold-soft);">Why Solstice</span>
+    <div class="eyebrow-row"><span class="index-num">00</span><span class="eyebrow" style="color:var(--gold-soft);">Why Solstice</span></div>
     <div class="solstice-line" style="max-width:64px;"></div>
     <h2 style="margin-top:26px;">A solstice marks the point the sun reaches its furthest, most deliberate position before turning back. <strong>We apply the same standard to property:</strong> every listing is chosen for where it sits, not just what's built on it.</h2>
     <div class="stats">
@@ -449,7 +658,7 @@
 <section id="listings">
   <div class="section-head-row reveal">
     <div class="section-head">
-      <span class="eyebrow">Featured</span>
+      <div class="eyebrow-row"><span class="index-num">01 / 06</span><span class="eyebrow">Featured</span></div>
       <h2>Current listings</h2>
       <p>A short list, kept deliberately short. Each property below is personally walked by a Solstice agent before it's published.</p>
     </div>
@@ -459,10 +668,12 @@
     </div>
   </div>
   <div class="listings-grid">
-    <div class="listing-card reveal">
+    <div class="listing-card reveal" data-property="kabulonga">
       <div class="listing-photo">
         <span class="listing-tag">For Sale</span>
+        <span class="listing-badge">Diplomatic Corridor</span>
         <img src="https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Contemporary residence, Kabulonga">
+        <div class="quickview"><span>View Details</span></div>
       </div>
       <div class="listing-body">
         <span class="listing-locale">Kabulonga, Lusaka</span>
@@ -474,10 +685,11 @@
         <div class="market-note"><b>Market note</b>Kabulonga continues to hold Lusaka's highest resale value per square metre, on sustained diplomatic-corridor demand.</div>
       </div>
     </div>
-    <div class="listing-card reveal">
+    <div class="listing-card reveal" data-property="ibexhill">
       <div class="listing-photo">
         <span class="listing-tag">For Sale</span>
         <img src="https://images.pexels.com/photos/17286413/pexels-photo-17286413.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Estate with pool, Ibex Hill">
+        <div class="quickview"><span>View Details</span></div>
       </div>
       <div class="listing-body">
         <span class="listing-locale">Ibex Hill, Lusaka</span>
@@ -489,10 +701,12 @@
         <div class="market-note"><b>Market note</b>Ibex Hill has appreciated steadily as new road works cut the commute to Manda Hill and the CBD.</div>
       </div>
     </div>
-    <div class="listing-card reveal">
+    <div class="listing-card reveal" data-property="roma">
       <div class="listing-photo">
         <span class="listing-tag">New Listing</span>
+        <span class="listing-badge">Exclusively Retained</span>
         <img src="https://images.pexels.com/photos/7587880/pexels-photo-7587880.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Garden residence, Roma">
+        <div class="quickview"><span>View Details</span></div>
       </div>
       <div class="listing-body">
         <span class="listing-locale">Roma, Lusaka</span>
@@ -512,7 +726,7 @@
 <section class="interiors">
   <div class="interiors-grid">
     <div class="interiors-copy reveal">
-      <span class="eyebrow">Interiors</span>
+      <div class="eyebrow-row"><span class="index-num">02 / 06</span><span class="eyebrow">Interiors</span></div>
       <div class="solstice-line" style="max-width:64px;"></div>
       <h2 style="margin-top:22px;font-size:clamp(26px,3.2vw,38px);">Framed by natural light, styled for permanence.</h2>
       <p>Every Solstice interior is styled and shot at golden hour, the same hour the name refers to. It's a small discipline, and it's the reason our listings photograph the way they show.</p>
@@ -528,7 +742,7 @@
 <!-- DEVELOPMENTS -->
 <section id="developments" class="dev-strip">
   <div class="section-head reveal">
-    <span class="eyebrow">Developments</span>
+    <div class="eyebrow-row"><span class="index-num">03 / 06</span><span class="eyebrow">Developments</span></div>
     <h2>New ground</h2>
     <p>Beyond resale, Solstice partners with a small number of Zambian developers on ground-up estates.</p>
   </div>
@@ -548,6 +762,75 @@
   </div>
 </section>
 
+<!-- NEIGHBORHOODS -->
+<section id="neighborhoods" class="neighborhoods">
+  <div class="section-head reveal">
+    <div class="eyebrow-row"><span class="index-num">04 / 06</span><span class="eyebrow">Corridors</span></div>
+    <h2>Neighborhoods of Lusaka</h2>
+    <p>Security, schooling, and proximity to embassies and the diplomatic corridor drive most of our buyer conversations before price ever comes up. Here's how the four we work in most compare.</p>
+  </div>
+  <div class="nb-layout reveal">
+    <div class="nb-tabs" role="tablist">
+      <button class="nb-tab active" data-nb="kabulonga"><span>Kabulonga</span><span class="n">01</span></button>
+      <button class="nb-tab" data-nb="ibexhill"><span>Ibex Hill</span><span class="n">02</span></button>
+      <button class="nb-tab" data-nb="roma"><span>Roma</span><span class="n">03</span></button>
+      <button class="nb-tab" data-nb="sunningdale"><span>Sunningdale</span><span class="n">04</span></button>
+    </div>
+    <div class="nb-panel active" data-nb-panel="kabulonga">
+      <div class="nb-photo"><img src="https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Kabulonga"></div>
+      <div class="nb-info">
+        <h4>Kabulonga</h4>
+        <p>Lusaka's traditional diplomatic address. Wide plots, mature jacaranda-lined streets, and the highest concentration of embassies and high-commissions in the city.</p>
+        <div class="nb-traits">
+          <div><span>Security</span><b>Gated, 24hr patrol standard</b></div>
+          <div><span>Schools</span><b>ICS, American Int'l, 5–10 min</b></div>
+          <div><span>Corporate</span><b>15+ embassies within 3km</b></div>
+          <div><span>Character</span><b>Established, low turnover</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="nb-panel" data-nb-panel="ibexhill">
+      <div class="nb-photo"><img src="https://images.pexels.com/photos/17286413/pexels-photo-17286413.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Ibex Hill"></div>
+      <div class="nb-info">
+        <h4>Ibex Hill</h4>
+        <p>Elevated, newer-build corridor favoured by senior executives. Larger plots than Kabulonga at a comparable price point, with faster access to the CBD since the recent road upgrades.</p>
+        <div class="nb-traits">
+          <div><span>Security</span><b>Estate-managed, boomed access</b></div>
+          <div><span>Schools</span><b>Rhodes Park, 10–15 min</b></div>
+          <div><span>Corporate</span><b>10 min to Manda Hill / CBD</b></div>
+          <div><span>Character</span><b>New-build, larger footprints</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="nb-panel" data-nb-panel="roma">
+      <div class="nb-photo"><img src="https://images.pexels.com/photos/7587880/pexels-photo-7587880.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Roma"></div>
+      <div class="nb-info">
+        <h4>Roma</h4>
+        <p>Quiet, family-first, and the shortest run to the international-school belt. Slightly smaller plots than Kabulonga or Ibex Hill, traded for walkability and a tighter-knit street feel.</p>
+        <div class="nb-traits">
+          <div><span>Security</span><b>Neighbourhood watch, low crime</b></div>
+          <div><span>Schools</span><b>Lusaka Int'l, walkable</b></div>
+          <div><span>Corporate</span><b>Mixed residential, low traffic</b></div>
+          <div><span>Character</span><b>Tree-lined, family-oriented</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="nb-panel" data-nb-panel="sunningdale">
+      <div class="nb-photo"><img src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Sunningdale"></div>
+      <div class="nb-info">
+        <h4>Sunningdale</h4>
+        <p>The value corridor of the four — newer housing stock at a materially lower entry price, popular with first-generation buyers and as a rental-yield play for investors.</p>
+        <div class="nb-traits">
+          <div><span>Security</span><b>Perimeter walls, private guards</b></div>
+          <div><span>Schools</span><b>Twin Palm, 10 min</b></div>
+          <div><span>Corporate</span><b>Emerging retail corridor</b></div>
+          <div><span>Character</span><b>Newer stock, strong yield</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about" class="about">
   <div class="about-grid">
@@ -556,7 +839,7 @@
       <div class="badge">Principal Agent</div>
     </div>
     <div class="about-copy reveal">
-      <span class="eyebrow">About Solstice</span>
+      <div class="eyebrow-row"><span class="index-num">05 / 06</span><span class="eyebrow">About Solstice</span></div>
       <div class="solstice-line" style="max-width:64px;"></div>
       <h2 style="margin-top:22px;font-size:clamp(26px,3.2vw,38px);">Built by people who grew up on this ground.</h2>
       <p>Solstice Estates was founded on a simple frustration: too much of Lusaka's best property changed hands quietly, off-market, without ever being shown properly. We built an agency around presentation: proper photography, honest specs, and agents who know every suburb on foot, not just on paper.</p>
@@ -571,7 +854,7 @@
 
 <!-- CTA -->
 <section id="contact" class="cta">
-  <span class="eyebrow" style="color:var(--gold-soft);">Get in touch</span>
+  <div class="eyebrow-row" style="justify-content:center;"><span class="index-num">06 / 06</span><span class="eyebrow" style="color:var(--gold-soft);">Get in touch</span></div>
   <div class="solstice-line full" style="max-width:64px;margin-left:auto;margin-right:auto;"></div>
   <h2 style="margin-top:26px;">Thinking of buying, selling,<br>or just <em>looking</em>?</h2>
   <p>Tell us what you're after, and an agent will respond within a day.</p>
@@ -608,6 +891,62 @@
   </div>
 </footer>
 
+<!-- PROPERTY MODAL -->
+<div class="property-modal" id="propertyModal">
+  <button class="modal-close" data-close-modal>✕</button>
+  <div class="modal-panel">
+    <div class="modal-gallery">
+      <div class="modal-gallery-track" id="modalGalleryTrack"></div>
+      <button class="modal-gallery-arrow prev" data-gallery-prev>‹</button>
+      <button class="modal-gallery-arrow next" data-gallery-next>›</button>
+      <div class="modal-gallery-nav" id="modalGalleryNav"></div>
+    </div>
+    <div class="modal-body">
+      <span class="modal-locale" id="modalLocale"></span>
+      <h3 id="modalTitle"></h3>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-form">
+        <span class="eyebrow">Request Details</span>
+        <form id="modalForm">
+          <input type="text" placeholder="Full name" required>
+          <input type="email" placeholder="Email address" required>
+          <input type="tel" placeholder="Phone (optional)">
+          <textarea placeholder="Anything specific you'd like to know?"></textarea>
+          <button type="submit" class="btn btn-primary">Enquire About This Property</button>
+        </form>
+        <div class="form-confirm" id="modalConfirm">Thank you — a Solstice agent will be in touch about this property within one business day.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INQUIRY DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay">
+  <div class="drawer">
+    <button class="drawer-close" data-close-drawer>✕</button>
+    <span class="eyebrow">Solstice Estates</span>
+    <h3>Start a conversation</h3>
+    <p>Buying, selling, or requesting access to off-market inventory — tell us what you're after and an agent will respond within a day.</p>
+    <div class="modal-form">
+      <form id="drawerForm">
+        <input type="text" placeholder="Full name" required>
+        <input type="email" placeholder="Email address" required>
+        <input type="tel" placeholder="Phone">
+        <select>
+          <option>I'm looking to buy</option>
+          <option>I'm looking to sell</option>
+          <option>Request off-market access</option>
+        </select>
+        <textarea placeholder="Tell us a bit more"></textarea>
+        <button type="submit" class="btn btn-primary">Send Enquiry</button>
+      </form>
+      <div class="form-confirm" id="drawerConfirm">Thank you — your enquiry has been received. A Solstice agent will reach out within one business day.</div>
+    </div>
+  </div>
+</div>
+
 <script>
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
@@ -635,7 +974,133 @@
         const value = currency === 'USD' ? el.dataset.usd : el.dataset.zmw;
         el.textContent = currency + ' ' + value;
       });
+      activeCurrency = currency;
+      if(propertyModal.classList.contains('open')) renderModal(currentPropertyId);
     });
+  });
+
+  // --- Mobile full-screen nav ---
+  const mobileNav = document.getElementById('mobileNav');
+  document.querySelectorAll('[data-open-mobile-nav]').forEach(b => b.addEventListener('click', () => mobileNav.classList.add('open')));
+  document.querySelectorAll('[data-close-mobile-nav]').forEach(b => b.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  // --- Inquiry drawer ---
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  document.querySelectorAll('[data-open-drawer]').forEach(b => b.addEventListener('click', (e) => {
+    e.preventDefault();
+    mobileNav.classList.remove('open');
+    drawerOverlay.classList.add('open');
+  }));
+  document.querySelectorAll('[data-close-drawer]').forEach(b => b.addEventListener('click', () => drawerOverlay.classList.remove('open')));
+  drawerOverlay.addEventListener('click', (e) => { if(e.target === drawerOverlay) drawerOverlay.classList.remove('open'); });
+  document.getElementById('drawerForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('drawerConfirm').classList.add('show');
+    e.target.reset();
+  });
+
+  // --- Neighborhood tabs ---
+  document.querySelectorAll('.nb-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.nb-tab').forEach(t => t.classList.toggle('active', t === tab));
+      const id = tab.dataset.nb;
+      document.querySelectorAll('.nb-panel').forEach(p => p.classList.toggle('active', p.dataset.nbPanel === id));
+    });
+  });
+
+  // --- Property modal ---
+  const PROPERTIES = {
+    kabulonga: {
+      locale: 'Kabulonga, Lusaka', title: 'The Kabulonga House',
+      zmw: '9,800,000', usd: '363,000',
+      beds: 5, baths: 4, plot: '1,020 m²', floor: '620 m²',
+      images: [
+        'https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1400',
+        'https://images.pexels.com/photos/19689230/pexels-photo-19689230.jpeg?auto=compress&cs=tinysrgb&w=1400',
+        'https://images.pexels.com/photos/31737843/pexels-photo-31737843.jpeg?auto=compress&cs=tinysrgb&w=1400'
+      ],
+      desc: 'A five-bedroom residence set on a mature quarter-acre plot in Lusaka\'s diplomatic corridor. Recently renovated interiors pair oak joinery with locally quarried stone, and the walled garden backs directly onto Kabulonga\'s embassy row.'
+    },
+    ibexhill: {
+      locale: 'Ibex Hill, Lusaka', title: 'Ibex Hill Residence',
+      zmw: '14,250,000', usd: '528,000',
+      beds: 6, baths: 5, plot: '1,450 m²', floor: '890 m²',
+      images: [
+        'https://images.pexels.com/photos/17286413/pexels-photo-17286413.jpeg?auto=compress&cs=tinysrgb&w=1400',
+        'https://images.pexels.com/photos/4626268/pexels-photo-4626268.jpeg?auto=compress&cs=tinysrgb&w=1400',
+        'https://images.pexels.com/photos/19689230/pexels-photo-19689230.jpeg?auto=compress&cs=tinysrgb&w=1400'
+      ],
+      desc: 'An elevated six-bedroom estate with a private pool terrace and uninterrupted views over the Ibex Hill ridge. Built in 2022 to an executive brief, with a self-contained guest wing and staff quarters.'
+    },
+    roma: {
+      locale: 'Roma, Lusaka', title: 'The Roma Garden House',
+      zmw: '6,450,000', usd: '239,000',
+      beds: 4, baths: 3, plot: '780 m²', floor: '410 m²',
+      images: [
+        'https://images.pexels.com/photos/7587880/pexels-photo-7587880.jpeg?auto=compress&cs=tinysrgb&w=1400',
+        'https://images.pexels.com/photos/31737843/pexels-photo-31737843.jpeg?auto=compress&cs=tinysrgb&w=1400',
+        'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1400'
+      ],
+      desc: 'A tree-shaded four-bedroom family home a short walk from Roma\'s international schools. Wraparound garden, covered veranda, and a layout built for entertaining without sacrificing quiet family space upstairs.'
+    }
+  };
+
+  let activeCurrency = 'ZMW';
+  let currentPropertyId = null;
+  let galleryIndex = 0;
+
+  const propertyModal = document.getElementById('propertyModal');
+  const galleryTrack = document.getElementById('modalGalleryTrack');
+  const galleryNav = document.getElementById('modalGalleryNav');
+
+  function renderModal(id){
+    const p = PROPERTIES[id];
+    if(!p) return;
+    currentPropertyId = id;
+    document.getElementById('modalLocale').textContent = p.locale;
+    document.getElementById('modalTitle').textContent = p.title;
+    document.getElementById('modalPrice').textContent = activeCurrency + ' ' + (activeCurrency === 'USD' ? p.usd : p.zmw);
+    document.getElementById('modalDesc').textContent = p.desc;
+    document.getElementById('modalSpecs').innerHTML = `
+      <div>Bedrooms<b>${p.beds}</b></div>
+      <div>Bathrooms<b>${p.baths}</b></div>
+      <div>Plot Size<b>${p.plot}</b></div>
+      <div>Floor Area<b>${p.floor}</b></div>`;
+    galleryTrack.innerHTML = p.images.map((src,i) => `<img src="${src}" class="${i===0?'active':''}" alt="${p.title} photo ${i+1}">`).join('');
+    galleryNav.innerHTML = p.images.map((_,i) => `<button class="${i===0?'active':''}" data-gallery-dot="${i}"></button>`).join('');
+    galleryIndex = 0;
+    document.getElementById('modalConfirm').classList.remove('show');
+    document.getElementById('modalForm').reset();
+  }
+
+  function setGalleryIndex(i){
+    const imgs = galleryTrack.querySelectorAll('img');
+    const dots = galleryNav.querySelectorAll('button');
+    galleryIndex = (i + imgs.length) % imgs.length;
+    imgs.forEach((img,idx) => img.classList.toggle('active', idx === galleryIndex));
+    dots.forEach((d,idx) => d.classList.toggle('active', idx === galleryIndex));
+  }
+
+  document.querySelectorAll('.listing-card').forEach(card => {
+    card.addEventListener('click', () => {
+      renderModal(card.dataset.property);
+      propertyModal.classList.add('open');
+    });
+  });
+  document.querySelectorAll('[data-close-modal]').forEach(b => b.addEventListener('click', () => propertyModal.classList.remove('open')));
+  propertyModal.addEventListener('click', (e) => { if(e.target === propertyModal) propertyModal.classList.remove('open'); });
+  document.querySelector('[data-gallery-prev]').addEventListener('click', () => setGalleryIndex(galleryIndex - 1));
+  document.querySelector('[data-gallery-next]').addEventListener('click', () => setGalleryIndex(galleryIndex + 1));
+  galleryNav.addEventListener('click', (e) => {
+    if(e.target.dataset.galleryDot !== undefined) setGalleryIndex(parseInt(e.target.dataset.galleryDot));
+  });
+  document.getElementById('modalForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('modalConfirm').classList.add('show');
+    e.target.reset();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){ propertyModal.classList.remove('open'); drawerOverlay.classList.remove('open'); mobileNav.classList.remove('open'); }
   });
 </script>
 
