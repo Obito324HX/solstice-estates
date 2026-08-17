@@ -361,6 +361,12 @@
     display:flex;justify-content:space-between;padding-top:22px;
     letter-spacing:0.04em;flex-wrap:wrap;gap:10px;
   }
+  .footer-bottom a{
+    color:var(--gold-soft);
+    border-bottom:1px solid rgba(222,192,126,0.35);
+    padding-bottom:1px;
+  }
+  .footer-bottom a:hover{border-color:var(--gold-soft);}
 
   /* --- Reveal on scroll --- */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.16,.84,.44,1);}
@@ -570,8 +576,8 @@
   <h2 style="margin-top:26px;">Thinking of buying, selling,<br>or just <em>looking</em>?</h2>
   <p>Tell us what you're after, and an agent will respond within a day.</p>
   <div class="hero-actions">
-    <a href="#" class="btn btn-primary">Book a Consultation</a>
-    <a href="#" class="btn btn-ghost">Browse All Listings</a>
+    <a href="mailto:hello@solsticeestates.zm" class="btn btn-primary">Book a Consultation</a>
+    <a href="#listings" class="btn btn-ghost">Browse All Listings</a>
   </div>
   <div class="cta-contacts">
     <div><span>Office</span>Kabulonga Road, Lusaka</div>
@@ -598,7 +604,7 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 Solstice Estates, Lusaka. All rights reserved.</span>
-    <span>Designed &amp; built by Zed-Forge</span>
+    <span>Designed &amp; built by <a href="https://zed-forge-xi.vercel.app/" target="_blank" rel="noopener">Zed-Forge</a></span>
   </div>
 </footer>
 
