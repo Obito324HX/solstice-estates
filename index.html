@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solstice Estates: Lusaka, Zambia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#1C2420;
+    --charcoal-2:#232B26;
+    --ivory:#F6F1E7;
+    --ivory-2:#EDE6D6;
+    --gold:#C89B3C;
+    --gold-soft:#DEC07E;
+    --clay:#9C4A2C;
+    --sage:#5C6B53;
+    --ink:#26261F;
+    --ink-soft:#5B5A4E;
+    --line:rgba(200,155,60,0.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* --- Signature element: the Solstice Line --- */
+  .solstice-line{
+    position:relative;
+    height:1px;
+    background:var(--line);
+    margin:22px 0 0;
+    overflow:hidden;
+  }
+  .solstice-line::after{
+    content:'';
+    position:absolute;
+    top:0;left:0;
+    height:1px;
+    width:0%;
+    background:linear-gradient(90deg,var(--gold),var(--clay));
+    transition:width 1.4s cubic-bezier(.16,.84,.44,1);
+  }
+  .solstice-line.lit::after{ width:64px; }
+  .solstice-line.full.lit::after{ width:100%; }
+
+  /* --- Nav --- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 5vw;
+    background:linear-gradient(to bottom, rgba(28,36,32,0.55), rgba(28,36,32,0));
+    transition:background .4s ease, backdrop-filter .4s ease;
+  }
+  header.solid{
+    background:rgba(28,36,32,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(200,155,60,0.15);
+  }
+  .brand{display:flex;align-items:center;gap:10px;color:var(--ivory);}
+  .brand svg{width:26px;height:26px;}
+  .brand-word{font-family:'Fraunces',serif;font-size:19px;letter-spacing:0.01em;}
+  nav ul{display:flex;align-items:center;gap:38px;list-style:none;}
+  nav a{
+    color:var(--ivory);font-size:13px;
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.08em;text-transform:uppercase;
+    opacity:0.85; transition:opacity .2s, border-color .2s;
+    position:relative;
+    padding-bottom:3px;
+    border-bottom:1px solid transparent;
+  }
+  nav a:not(.nav-cta):hover{opacity:1;border-color:rgba(200,155,60,0.6);}
+  .nav-cta{
+    border:1px solid var(--gold-soft);
+    padding:9px 18px;
+    color:var(--ivory) !important;
+    border-radius:2px;
+  }
+  .menu-toggle{display:none;color:var(--ivory);background:none;border:none;font-size:22px;}
+
+  /* --- Hero --- */
+  .hero{
+    position:relative;height:100vh;min-height:640px;
+    display:flex;align-items:flex-end;
+    color:var(--ivory);
+    overflow:hidden;
+  }
+  .hero img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:saturate(1.02);
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(15,18,14,0.88) 0%, rgba(15,18,14,0.35) 42%, rgba(15,18,14,0.08) 65%, rgba(15,18,14,0.35) 100%);
+  }
+  .hero-inner{position:relative;z-index:2;padding:0 5vw 7vw;max-width:900px;}
+  .hero .eyebrow{color:var(--gold-soft);margin-bottom:18px;display:block;}
+  .hero h1{
+    font-size:clamp(38px,6vw,78px);
+    font-weight:400;
+  }
+  .hero h1 em{font-style:italic;font-weight:300;color:var(--gold-soft);}
+  .hero p{
+    max-width:520px;margin-top:22px;
+    font-size:16px;line-height:1.65;color:rgba(246,241,231,0.82);
+    font-weight:300;
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 26px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+    border-radius:2px; cursor:pointer; transition:all .25s ease;
+  }
+  .btn-primary{background:var(--gold);color:var(--charcoal);border:1px solid var(--gold);}
+  .btn-primary:hover{background:var(--gold-soft);}
+  .btn-ghost{border:1px solid rgba(246,241,231,0.5);color:var(--ivory);}
+  .btn-ghost:hover{border-color:var(--ivory);background:rgba(246,241,231,0.08);}
+
+  .hero-scroll{
+    position:absolute;bottom:34px;right:5vw;z-index:2;
+    color:rgba(246,241,231,0.65);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:0.12em;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;
+  }
+  .hero-scroll .stick{width:1px;height:34px;background:rgba(246,241,231,0.4);position:relative;overflow:hidden;}
+  .hero-scroll .stick::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--gold);animation:stickMove 2.2s infinite ease-in-out;}
+  @keyframes stickMove{ 0%{top:-100%;} 60%{top:100%;} 100%{top:100%;} }
+
+  /* --- Section shells --- */
+  section{padding:120px 5vw;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head h2{font-size:clamp(28px,3.6vw,44px);font-weight:400;color:var(--ink);margin-top:16px;}
+  .section-head p{margin-top:18px;color:var(--ink-soft);font-size:15px;line-height:1.7;max-width:520px;}
+
+  /* --- Positioning statement --- */
+  .statement{
+    background:var(--charcoal);color:var(--ivory);
+    padding:110px 5vw;
+    text-align:left;
+  }
+  .statement .wrap{max-width:920px;}
+  .statement h2{
+    font-size:clamp(26px,3.4vw,42px);
+    font-weight:300;color:var(--ivory);
+    line-height:1.35;
+  }
+  .statement h2 strong{font-weight:500;color:var(--gold-soft);}
+  .statement .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:30px;margin-top:64px;
+  }
+  .stat-num{font-family:'Fraunces',serif;font-size:34px;color:var(--gold-soft);font-weight:400;}
+  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(246,241,231,0.6);margin-top:8px;}
+
+  /* --- Private off-market banner --- */
+  .private-banner{
+    background:var(--ink);color:var(--ivory);
+    padding:22px 5vw;
+    display:flex;align-items:center;justify-content:center;gap:16px;
+    flex-wrap:wrap;text-align:center;
+    border-top:1px solid rgba(200,155,60,0.25);
+    border-bottom:1px solid rgba(200,155,60,0.25);
+  }
+  .private-banner svg{width:18px;height:18px;flex-shrink:0;}
+  .private-banner p{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+    letter-spacing:0.04em;color:rgba(246,241,231,0.82);
+  }
+  .private-banner strong{color:var(--gold-soft);font-weight:500;}
+  .private-banner a{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--gold-soft);border-bottom:1px solid rgba(222,192,126,0.4);
+    padding-bottom:2px;flex-shrink:0;
+  }
+  .private-banner a:hover{border-color:var(--gold-soft);}
+
+  /* --- Currency toggle --- */
+  .currency-toggle{
+    display:inline-flex;align-items:center;gap:2px;
+    background:var(--ivory-2);border:1px solid rgba(28,36,32,0.12);
+    padding:4px;border-radius:2px;
+  }
+  .currency-toggle button{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:0.08em;text-transform:uppercase;
+    padding:7px 14px;border:none;background:none;cursor:pointer;
+    color:var(--ink-soft);border-radius:1px;transition:all .2s ease;
+  }
+  .currency-toggle button.active{background:var(--charcoal);color:var(--gold-soft);}
+  .section-head-row{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:24px;flex-wrap:wrap;margin-bottom:64px;
+  }
+  .section-head-row .section-head{margin-bottom:0;}
+  .market-note{
+    margin-top:14px;padding-top:14px;border-top:1px dashed rgba(28,36,32,0.15);
+    font-size:12.5px;line-height:1.6;color:var(--ink-soft);font-style:italic;
+  }
+  .market-note b{
+    font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:0.08em;text-transform:uppercase;color:var(--sage);
+    display:block;margin-bottom:4px;
+  }
+
+  /* --- Listings --- */
+  .listings-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  }
+  .listing-card{
+    background:var(--ivory-2);
+    border:1px solid rgba(28,36,32,0.08);
+    transition:transform .4s cubic-bezier(.16,.84,.44,1), box-shadow .4s ease;
+  }
+  .listing-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 24px 48px -18px rgba(28,36,32,0.28);
+  }
+  .listing-photo{
+    position:relative;aspect-ratio:4/5;overflow:hidden;
+  }
+  .listing-photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,.84,.44,1);}
+  .listing-card:hover .listing-photo img{transform:scale(1.06);}
+  .listing-tag{
+    position:absolute;top:16px;left:16px;
+    background:rgba(28,36,32,0.85);color:var(--gold-soft);
+    padding:6px 12px;font-family:'IBM Plex Mono',monospace;
+    font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+  }
+  .listing-body{padding:24px 22px 26px;}
+  .listing-locale{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage);}
+  .listing-body h3{font-size:22px;font-weight:500;margin-top:8px;color:var(--ink);}
+  .listing-specs{
+    display:flex;gap:18px;margin-top:16px;padding-top:16px;
+    border-top:1px solid rgba(28,36,32,0.1);
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);
+  }
+  .listing-price{margin-top:14px;font-family:'Fraunces',serif;font-size:20px;color:var(--clay);}
+
+  /* --- Interiors split --- */
+  .interiors{background:var(--ivory);}
+  .interiors-grid{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:0;
+    align-items:stretch;
+  }
+  .interiors-copy{
+    padding:70px 60px 70px 0;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .interiors-copy p{color:var(--ink-soft);font-size:15.5px;line-height:1.75;margin-top:20px;max-width:440px;}
+  .interiors-photos{
+    display:grid;grid-template-columns:1fr;gap:18px;
+  }
+  .interiors-photos .ph{aspect-ratio:16/11;overflow:hidden;}
+  .interiors-photos .ph img{width:100%;height:100%;object-fit:cover;}
+  .interiors-photos .ph.tall{aspect-ratio:16/13;}
+
+  /* --- Developments strip --- */
+  .dev-strip{background:var(--ivory-2);}
+  .dev-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:20px;}
+  .dev-card{position:relative;aspect-ratio:1/1;overflow:hidden;}
+  .dev-card:first-child{aspect-ratio:auto;}
+  .dev-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .dev-card:hover img{transform:scale(1.05);}
+  .dev-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(20,24,19,0.82), rgba(20,24,19,0) 55%);
+    display:flex;align-items:flex-end;padding:24px;
+  }
+  .dev-overlay span{color:var(--ivory);font-family:'Fraunces',serif;font-size:19px;}
+  .dev-overlay small{
+    display:block;color:var(--gold-soft);font-family:'IBM Plex Mono',monospace;
+    font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;
+  }
+
+  /* --- About / Agent --- */
+  .about{background:var(--ivory);}
+  .about-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:70px;align-items:center;}
+  .about-photo{aspect-ratio:4/5;overflow:hidden;position:relative;}
+  .about-photo img{width:100%;height:100%;object-fit:cover;}
+  .about-photo .badge{
+    position:absolute;bottom:-1px;left:-1px;
+    background:var(--gold);color:var(--charcoal);
+    padding:14px 20px;font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  }
+  .about-copy p{color:var(--ink-soft);font-size:15.5px;line-height:1.8;margin-top:18px;max-width:520px;}
+  .about-list{margin-top:32px;display:flex;flex-direction:column;gap:14px;}
+  .about-list div{
+    display:flex;gap:14px;align-items:baseline;
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink);
+  }
+  .about-list div .n{color:var(--gold);}
+
+  /* --- CTA / Contact --- */
+  .cta{
+    background:var(--charcoal);color:var(--ivory);
+    padding:130px 5vw;
+    text-align:center;
+    position:relative;
+  }
+  .cta h2{font-size:clamp(30px,4.6vw,56px);font-weight:400;max-width:720px;margin:0 auto;line-height:1.2;}
+  .cta h2 em{color:var(--gold-soft);font-style:italic;font-weight:300;}
+  .cta p{color:rgba(246,241,231,0.65);margin-top:22px;font-size:15px;}
+  .cta .hero-actions{justify-content:center;margin-top:40px;}
+  .cta-contacts{
+    margin-top:64px;display:flex;justify-content:center;gap:60px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;flex-wrap:wrap;
+  }
+  .cta-contacts div span{display:block;color:rgba(246,241,231,0.5);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;}
+
+  /* --- Footer --- */
+  footer{
+    background:var(--charcoal-2);color:rgba(246,241,231,0.55);
+    padding:50px 5vw 34px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+  }
+  .footer-top{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    padding-bottom:34px;border-bottom:1px solid rgba(246,241,231,0.1);
+    flex-wrap:wrap;gap:24px;
+  }
+  .footer-brand{color:var(--ivory);font-family:'Fraunces',serif;font-size:20px;}
+  .footer-cols{display:flex;gap:60px;flex-wrap:wrap;}
+  .footer-cols div{display:flex;flex-direction:column;gap:10px;}
+  .footer-cols a{opacity:0.75;transition:opacity .2s;}
+  .footer-cols a:hover{opacity:1;color:var(--gold-soft);}
+  .footer-bottom{
+    display:flex;justify-content:space-between;padding-top:22px;
+    letter-spacing:0.04em;flex-wrap:wrap;gap:10px;
+  }
+
+  /* --- Reveal on scroll --- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.16,.84,.44,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    nav ul{display:none;}
+    .menu-toggle{display:block;}
+    .statement .stats{grid-template-columns:repeat(2,1fr);row-gap:36px;}
+    .listings-grid{grid-template-columns:1fr;}
+    .interiors-grid{grid-template-columns:1fr;}
+    .interiors-copy{padding:0 0 40px;}
+    .dev-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .cta-contacts{gap:34px;}
+    section{padding:80px 6vw;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="brand">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 26C4 26 12 12 20 12C28 12 36 26 36 26" stroke="#C89B3C" stroke-width="1.4"/>
+      <circle cx="20" cy="19" r="4.5" stroke="#C89B3C" stroke-width="1.4"/>
+      <line x1="4" y1="30" x2="36" y2="30" stroke="#C89B3C" stroke-width="1" opacity="0.5"/>
+    </svg>
+    <span class="brand-word">Solstice Estates</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#listings">Listings</a></li>
+      <li><a href="#developments">Developments</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Enquire</a></li>
+    </ul>
+  </nav>
+  <button class="menu-toggle">☰</button>
+</header>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <img src="https://images.pexels.com/photos/4626268/pexels-photo-4626268.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Modern residence at dusk">
+  <div class="hero-inner">
+    <span class="eyebrow">Lusaka · Zambia</span>
+    <h1>Residences measured by the horizon, <em>curated</em> for the uncompromising.</h1>
+    <p>Solstice Estates curates Zambia's most considered addresses, from Ibex Hill to the Kabulonga ridge, for buyers who measure a home by what it overlooks, not just what it contains.</p>
+    <div class="hero-actions">
+      <a href="#listings" class="btn btn-primary">View Listings</a>
+      <a href="#about" class="btn btn-ghost">Meet the Agency</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="stick"></div>Scroll</div>
+</section>
+
+<!-- PRIVATE / OFF-MARKET -->
+<div class="private-banner">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+  <p><strong>Confidential Acquisitions &amp; Private Sales.</strong> Select inventory is never publicly listed and is shown by direct introduction only.</p>
+  <a href="#contact">Request Access →</a>
+</div>
+
+<!-- POSITIONING STATEMENT -->
+<section class="statement">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:var(--gold-soft);">Why Solstice</span>
+    <div class="solstice-line" style="max-width:64px;"></div>
+    <h2 style="margin-top:26px;">A solstice marks the point the sun reaches its furthest, most deliberate position before turning back. <strong>We apply the same standard to property:</strong> every listing is chosen for where it sits, not just what's built on it.</h2>
+    <div class="stats">
+      <div><div class="stat-num">120+</div><div class="stat-label">Properties Placed</div></div>
+      <div><div class="stat-num">14</div><div class="stat-label">Lusaka Suburbs</div></div>
+      <div><div class="stat-num">9</div><div class="stat-label">Years Combined Practice</div></div>
+      <div><div class="stat-num">ZMW 2.1B</div><div class="stat-label">Private Transactions Managed</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section id="listings">
+  <div class="section-head-row reveal">
+    <div class="section-head">
+      <span class="eyebrow">Featured</span>
+      <h2>Current listings</h2>
+      <p>A short list, kept deliberately short. Each property below is personally walked by a Solstice agent before it's published.</p>
+    </div>
+    <div class="currency-toggle" role="group" aria-label="Currency">
+      <button type="button" class="active" data-currency="ZMW">ZMW</button>
+      <button type="button" data-currency="USD">USD</button>
+    </div>
+  </div>
+  <div class="listings-grid">
+    <div class="listing-card reveal">
+      <div class="listing-photo">
+        <span class="listing-tag">For Sale</span>
+        <img src="https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Contemporary residence, Kabulonga">
+      </div>
+      <div class="listing-body">
+        <span class="listing-locale">Kabulonga, Lusaka</span>
+        <h3>The Kabulonga House</h3>
+        <div class="listing-specs">
+          <span>5 Bed</span><span>·</span><span>4 Bath</span><span>·</span><span>620 m²</span>
+        </div>
+        <div class="listing-price" data-zmw="9,800,000" data-usd="363,000">ZMW 9,800,000</div>
+        <div class="market-note"><b>Market note</b>Kabulonga continues to hold Lusaka's highest resale value per square metre, on sustained diplomatic-corridor demand.</div>
+      </div>
+    </div>
+    <div class="listing-card reveal">
+      <div class="listing-photo">
+        <span class="listing-tag">For Sale</span>
+        <img src="https://images.pexels.com/photos/17286413/pexels-photo-17286413.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Estate with pool, Ibex Hill">
+      </div>
+      <div class="listing-body">
+        <span class="listing-locale">Ibex Hill, Lusaka</span>
+        <h3>Ibex Hill Residence</h3>
+        <div class="listing-specs">
+          <span>6 Bed</span><span>·</span><span>5 Bath</span><span>·</span><span>890 m²</span>
+        </div>
+        <div class="listing-price" data-zmw="14,250,000" data-usd="528,000">ZMW 14,250,000</div>
+        <div class="market-note"><b>Market note</b>Ibex Hill has appreciated steadily as new road works cut the commute to Manda Hill and the CBD.</div>
+      </div>
+    </div>
+    <div class="listing-card reveal">
+      <div class="listing-photo">
+        <span class="listing-tag">New Listing</span>
+        <img src="https://images.pexels.com/photos/7587880/pexels-photo-7587880.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Garden residence, Roma">
+      </div>
+      <div class="listing-body">
+        <span class="listing-locale">Roma, Lusaka</span>
+        <h3>The Roma Garden House</h3>
+        <div class="listing-specs">
+          <span>4 Bed</span><span>·</span><span>3 Bath</span><span>·</span><span>410 m²</span>
+        </div>
+        <div class="listing-price" data-zmw="6,450,000" data-usd="239,000">ZMW 6,450,000</div>
+        <div class="market-note"><b>Market note</b>Roma's tree-lined streets and proximity to international schools keep it in steady demand among relocating families.</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:20px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);opacity:.7;">USD figures are indicative only, converted at ZMW/USD ≈ 27.</p>
+</section>
+
+<!-- INTERIORS -->
+<section class="interiors">
+  <div class="interiors-grid">
+    <div class="interiors-copy reveal">
+      <span class="eyebrow">Interiors</span>
+      <div class="solstice-line" style="max-width:64px;"></div>
+      <h2 style="margin-top:22px;font-size:clamp(26px,3.2vw,38px);">Framed by natural light, styled for permanence.</h2>
+      <p>Every Solstice interior is styled and shot at golden hour, the same hour the name refers to. It's a small discipline, and it's the reason our listings photograph the way they show.</p>
+      <p>We don't stage what we wouldn't live in. Furnishings, finishes, and fittings are sourced from the same short list of Lusaka craftsmen on every project.</p>
+    </div>
+    <div class="interiors-photos reveal">
+      <div class="ph tall"><img src="https://images.pexels.com/photos/19689230/pexels-photo-19689230.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Living room interior"></div>
+      <div class="ph"><img src="https://images.pexels.com/photos/31737843/pexels-photo-31737843.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Bedroom interior"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPMENTS -->
+<section id="developments" class="dev-strip">
+  <div class="section-head reveal">
+    <span class="eyebrow">Developments</span>
+    <h2>New ground</h2>
+    <p>Beyond resale, Solstice partners with a small number of Zambian developers on ground-up estates.</p>
+  </div>
+  <div class="dev-grid">
+    <div class="dev-card reveal">
+      <img src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Sunningdale development">
+      <div class="dev-overlay"><span><small>Phase 01 · Underway</small>The Sunningdale Row</span></div>
+    </div>
+    <div class="dev-card reveal">
+      <img src="https://images.pexels.com/photos/4626268/pexels-photo-4626268.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Woodlands development">
+      <div class="dev-overlay"><span><small>Phase 02 · Planning</small>Woodlands Rise</span></div>
+    </div>
+    <div class="dev-card reveal">
+      <img src="https://images.pexels.com/photos/8134821/pexels-photo-8134821.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Chalala development">
+      <div class="dev-overlay"><span><small>Phase 03 · Reserved</small>Chalala Gate</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="about-grid">
+    <div class="about-photo reveal">
+      <img src="https://images.pexels.com/photos/8815878/pexels-photo-8815878.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Principal agent">
+      <div class="badge">Principal Agent</div>
+    </div>
+    <div class="about-copy reveal">
+      <span class="eyebrow">About Solstice</span>
+      <div class="solstice-line" style="max-width:64px;"></div>
+      <h2 style="margin-top:22px;font-size:clamp(26px,3.2vw,38px);">Built by people who grew up on this ground.</h2>
+      <p>Solstice Estates was founded on a simple frustration: too much of Lusaka's best property changed hands quietly, off-market, without ever being shown properly. We built an agency around presentation: proper photography, honest specs, and agents who know every suburb on foot, not just on paper.</p>
+      <div class="about-list">
+        <div><span class="n">01</span> Independent valuation on every listing</div>
+        <div><span class="n">02</span> In-house photography and styling</div>
+        <div><span class="n">03</span> Direct agent contact, no call centre</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta">
+  <span class="eyebrow" style="color:var(--gold-soft);">Get in touch</span>
+  <div class="solstice-line full" style="max-width:64px;margin-left:auto;margin-right:auto;"></div>
+  <h2 style="margin-top:26px;">Thinking of buying, selling,<br>or just <em>looking</em>?</h2>
+  <p>Tell us what you're after, and an agent will respond within a day.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn btn-primary">Book a Consultation</a>
+    <a href="#" class="btn btn-ghost">Browse All Listings</a>
+  </div>
+  <div class="cta-contacts">
+    <div><span>Office</span>Kabulonga Road, Lusaka</div>
+    <div><span>Phone</span>+260 97 000 0000</div>
+    <div><span>Email</span>hello@solsticeestates.zm</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">Solstice Estates</div>
+    <div class="footer-cols">
+      <div>
+        <a href="#listings">Listings</a>
+        <a href="#developments">Developments</a>
+        <a href="#about">About</a>
+      </div>
+      <div>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Solstice Estates, Lusaka. All rights reserved.</span>
+    <span>Designed &amp; built by Zed-Forge</span>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('solid', window.scrollY > 60);
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.classList.contains('solstice-line')) e.target.classList.add('lit');
+      }
+    });
+  }, {threshold:0.2});
+
+  document.querySelectorAll('.reveal, .solstice-line').forEach(el => io.observe(el));
+
+  // currency toggle
+  const toggleBtns = document.querySelectorAll('.currency-toggle button');
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const currency = btn.dataset.currency;
+      toggleBtns.forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.listing-price').forEach(el => {
+        const value = currency === 'USD' ? el.dataset.usd : el.dataset.zmw;
+        el.textContent = currency + ' ' + value;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
